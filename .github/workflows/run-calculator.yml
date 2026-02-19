@@ -1,0 +1,26 @@
+name: Run C Calculator
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install GCC
+        run: sudo apt update && sudo apt install -y gcc
+
+      - name: Compile Calculator
+        run: gcc calculator.c -o calculator
+
+      - name: Run Test Case 1 (Addition)
+        run: echo -e "10\n+\n5" | ./calculator
+
+      - name: Run Test Case 2 (Multiplication)
+        run: echo -e "6\n*\n7" | ./calculator
